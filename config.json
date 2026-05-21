@@ -1,0 +1,10 @@
+{
+  "token": "MTUwNjY1Njk2Mzg4NTQwMDEwNQ.GUBke4.aRgoZgn-a66h1amVZ7SLDO6d2ByLx8lc-OhH-A",
+  "banned_words": [
+    "Nigger",
+    "Nigga",
+    "NIGGER"
+  ],
+  "warn_limit": 3,
+  "log_channel_id": null
+}
