@@ -1,5 +1,6 @@
 import discord
 import os
+import random
 from discord.ext import commands
 
 # ============================================================
@@ -13,14 +14,20 @@ BANNED_WORDS = [
     # Add more words here
 ]
 
-WARN_LIMIT = 3  # Warnings before the alert fires
+WARN_LIMIT = 999  # Warnings before the alert fires
 
 LOG_CHANNEL_ID = None  # Set to a channel ID like 123456789 if you want logs
 
 GREET_USERS = {
-    123456789012345678: "Hey! 👋 Great to see you! Hope you're having an amazing day! 😊",
-    # Add more users below:
-    # 987654321098765432: "Yo! What's up! 🔥",
+    123456789012345678: [
+        "Shut the fuck up Nigger",
+        "Sub 3",
+        "Fuck you",
+        "Hentai Beater",
+        "Monkey",
+    ],
+    # Single message user (still works):
+    # 987654321098765432: ["Yo! What's up! 🔥"],
 }
 
 # ============================================================
@@ -58,9 +65,10 @@ async def on_message(message: discord.Message):
     if message.author.bot:
         return
 
-    # ── Friendly greeting for specific users ──
+    # ── Random greeting for specific users ──
     if message.author.id in GREET_USERS:
-        await message.channel.send(GREET_USERS[message.author.id])
+        reply = random.choice(GREET_USERS[message.author.id])
+        await message.channel.send(reply)
 
     # ── Banned word check ──
     trigger = contains_banned_word(message.content)
