@@ -19,13 +19,17 @@ WARN_LIMIT = 999  # Warnings before the alert fires
 LOG_CHANNEL_ID = None  # Set to a channel ID like 123456789 if you want logs
 
 GREET_USERS = {
-    123456789012345678: [
+    1221109127359627405: [
         "Shut the fuck up Nigger",
         "Sub 3",
         "Fuck you",
         "Hentai Beater",
         "Monkey",
     ],
+    1116351244424982578: [
+        "What's up King"
+        "You're the Goat!"
+        "Holy Adam"
     # Single message user (still works):
     # 987654321098765432: ["Yo! What's up! 🔥"],
 }
