@@ -18,6 +18,8 @@ WARN_LIMIT = 999  # Warnings before the alert fires
 
 LOG_CHANNEL_ID = None  # Set to a channel ID like 123456789 if you want logs
 
+GREET_ENABLED = True  # Change to False to turn off all greetings
+
 GREET_USERS = {
     1221109127359627405: [
         "Shut the fuck up Nigger",
@@ -31,8 +33,6 @@ GREET_USERS = {
         "You're the Goat!",
         "Holy Adam",
     ],
-    # Single message user (still works):
-    # 987654321098765432: ["Yo! What's up! 🔥"],
 }
 
 # ============================================================
@@ -71,7 +71,7 @@ async def on_message(message: discord.Message):
         return
 
     # ── Random greeting for specific users ──
-    if message.author.id in GREET_USERS:
+    if GREET_ENABLED and message.author.id in GREET_USERS:
         reply = random.choice(GREET_USERS[message.author.id])
         await message.reply(reply)
 
@@ -114,6 +114,15 @@ def is_admin():
     async def predicate(ctx):
         return ctx.author.guild_permissions.administrator
     return commands.check(predicate)
+
+@bot.command(name="greet")
+@is_admin()
+async def toggle_greet(ctx):
+    """!greet — toggle greetings on/off without editing the file."""
+    global GREET_ENABLED
+    GREET_ENABLED = not GREET_ENABLED
+    status = "on 🟢" if GREET_ENABLED else "off 🔴"
+    await ctx.send(f"Greetings turned {status}")
 
 @bot.command(name="warnings")
 @is_admin()
