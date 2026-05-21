@@ -27,9 +27,10 @@ GREET_USERS = {
         "Monkey",
     ],
     1116351244424982578: [
-        "What's up King"
-        "You're the Goat!"
-        "Holy Adam"
+        "What's up King",
+        "You're the Goat!",
+        "Holy Adam",
+    ],
     # Single message user (still works):
     # 987654321098765432: ["Yo! What's up! 🔥"],
 }
