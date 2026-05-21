@@ -40,7 +40,7 @@ GREET_USERS = {
 # ============================================================
 warnings = {}
 intents = discord.Intents.all()
-bot = commands.Bot(command_prefix="!", intents=intents)
+bot = commands.Bot(command_prefix=["!", "?"], intents=intents)
 
 # ============================================================
 #  HELPERS
@@ -164,5 +164,15 @@ async def list_words(ctx):
         await ctx.send(f"🚫 Banned words: {words}")
     else:
         await ctx.send("No banned words set.")
+
+
+@bot.command(name="purge")
+@is_admin()
+async def purge(ctx, amount: int):
+    """?purge <number> — delete that many messages in this channel."""
+    await ctx.message.delete()
+    deleted = await ctx.channel.purge(limit=amount)
+    confirm = await ctx.send(f"🗑️ Deleted {len(deleted)} messages.")
+    await confirm.delete(delay=5)
 
 bot.run(TOKEN)
