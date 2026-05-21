@@ -73,7 +73,7 @@ async def on_message(message: discord.Message):
     # ── Random greeting for specific users ──
     if message.author.id in GREET_USERS:
         reply = random.choice(GREET_USERS[message.author.id])
-        await message.channel.send(reply)
+        await message.reply(reply)
 
     # ── Banned word check ──
     trigger = contains_banned_word(message.content)
