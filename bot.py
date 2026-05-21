@@ -1,41 +1,32 @@
 import discord
-import json
 import os
 from discord.ext import commands
 
 # ============================================================
-#  CONFIG — reads from Railway env vars or falls back to config.json
+#  CONFIG — edit everything here
 # ============================================================
-TOKEN = os.environ.get("TOKEN")
-BANNED_WORDS_ENV = os.environ.get("BANNED_WORDS")
-WARN_LIMIT = int(os.environ.get("WARN_LIMIT", 3))
-LOG_CHANNEL_ID = os.environ.get("LOG_CHANNEL_ID")
-LOG_CHANNEL_ID = int(LOG_CHANNEL_ID) if LOG_CHANNEL_ID else None
+TOKEN = os.environ.get("TOKEN")  # Set this in Railway variables
 
-# Fall back to config.json if no env vars set (local testing)
-if not TOKEN:
-    with open("config.json", "r") as f:
-        config = json.load(f)
-    TOKEN = config["token"]
-    BANNED_WORDS = [w.lower() for w in config["banned_words"]]
-    WARN_LIMIT = config.get("warn_limit", 3)
-    LOG_CHANNEL_ID = config.get("log_channel_id")
-else:
-    BANNED_WORDS = [w.strip().lower() for w in BANNED_WORDS_ENV.split(",")] if BANNED_WORDS_ENV else []
+BANNED_WORDS = [
+    "nigger",
+    "nigga",
+    # Add more words here
+]
 
-# ── Users to greet — add their ID and a friendly message ──
+WARN_LIMIT = 3  # Warnings before the alert fires
+
+LOG_CHANNEL_ID = None  # Set to a channel ID like 123456789 if you want logs
+
 GREET_USERS = {
     123456789012345678: "Hey! 👋 Great to see you! Hope you're having an amazing day! 😊",
-    # Add more users below like this:
+    # Add more users below:
     # 987654321098765432: "Yo! What's up! 🔥",
 }
-
-# In-memory warning tracker: {user_id: warn_count}
-warnings = {}
 
 # ============================================================
 #  BOT SETUP
 # ============================================================
+warnings = {}
 intents = discord.Intents.all()
 bot = commands.Bot(command_prefix="!", intents=intents)
 
